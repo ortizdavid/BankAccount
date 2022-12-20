@@ -11,11 +11,11 @@ namespace BankAccount.Accounts
     {
         public int Number { get; set;  }
         public double Balance { get; }
-        public ICustomer Customer { get; set; }
+        public ICustomer? Customer { get; set; }
         public AccountStatus Status { get; set; }
-        public void WithDraw(double ammount);
+        public void Withdraw(double ammount);
         public void Deposit(double amount);
-        public void Transfer(IAccount account1, IAccount account2);
+        public void Transfer(IAccount origin, IAccount destination, double amount);
         public void ConsultTransactions();
     }
 }

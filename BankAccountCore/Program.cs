@@ -15,9 +15,9 @@ internal class Program
         };
         saving.Deposit(89);
         saving.Deposit(90);
-        saving.Deposit(89);
+        saving.Withdraw(89);
         saving.Deposit(90000);
-        saving.Deposit(89);
+        saving.Withdraw(89);
         saving.Deposit(90);
         saving.ConsultTransactions();
         WriteLine(saving.Status);

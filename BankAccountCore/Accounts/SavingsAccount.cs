@@ -23,9 +23,7 @@ namespace BankAccount.Accounts
 
         public void ConsultTransactions()
         {
-            WriteLine("----------------------------------------------------------------");
             WriteLine("Number\t\tOrigin\t\tDestiny\t\tAmount\t\tType\t\tDate".ToUpper());
-            WriteLine("----------------------------------------------------------------");
             foreach (Transaction transaction in Transactions) 
             { 
                 WriteLine(transaction);
@@ -45,7 +43,7 @@ namespace BankAccount.Accounts
                     Balance  = Balance + amount;
                     var transaction = new Transaction
                     {
-                        Destiny = Number,
+                        Destination = Number,
                         Origin = Number,
                         Amount = amount,
                         TransactionDate = DateTime.Now,
@@ -58,18 +56,56 @@ namespace BankAccount.Accounts
             catch (Exception ex)
             {
                 WriteLine(ex.Message);
-                ReadKey();
             } 
         }
 
-        public void Transfer(IAccount account1, IAccount account2)
+        public void Transfer(IAccount origin, IAccount destination, double amount)
         {
-            throw new NotImplementedException();
+            origin.Deposit(amount);
+            destination.Deposit(amount);
+            var transaction = new Transaction
+            {
+                Origin = origin.Number,
+                Destination = destination.Number,
+                Amount = amount,
+                TransactionDate = DateTime.Now,
+                TransactionType = "Transfer",
+                Status = TransactionStatus.Succeeded
+            };
+            Transactions.Add(transaction);
         }
 
-        public void WithDraw(double ammount)
+        public void Withdraw(double amount)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (amount <= 0)
+                {
+                    throw new Exception("Amount must be  greather than 0");
+                }
+                else if (amount > 0 && amount < Balance)
+                {
+                    throw new Exception("Amount must be lower than Balance");
+                }
+                else
+                {
+                    Balance = Balance - amount;
+                    var transaction = new Transaction
+                    {
+                        Destination = Number,
+                        Origin = Number,
+                        Amount = amount,
+                        TransactionDate = DateTime.Now,
+                        TransactionType = "WithDraw",
+                        Status = TransactionStatus.Succeeded
+                    };
+                    Transactions.Add(transaction);
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLine(ex.Message);
+            }
         }
     }
 }
