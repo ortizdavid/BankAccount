@@ -10,19 +10,25 @@ namespace BankAccount.Accounts
 {
     public class SavingsAccount : IAccount
     {
-        private double balance;
-        public string Number { get; set; }
+        public int Number { get; set; }
         public double Balance { get; set; }
-        public ICustomer Customer { get; set; }
+        public ICustomer? Customer { get; set; }
         public AccountStatus Status { get; set; }
         public List<Transaction> Transactions { get; set; }
 
+        public SavingsAccount()
+        {
+            this.Transactions= new List<Transaction>();  
+        }
+
         public void ConsultTransactions()
         {
-            WriteLine("All Transactions");
+            WriteLine("----------------------------------------------------------------");
+            WriteLine("Number\t\tOrigin\t\tDestiny\t\tAmount\t\tType\t\tDate".ToUpper());
+            WriteLine("----------------------------------------------------------------");
             foreach (Transaction transaction in Transactions) 
             { 
-                WriteLine(transaction.ToString());
+                WriteLine(transaction);
             }
         }
 
@@ -32,7 +38,7 @@ namespace BankAccount.Accounts
             {
                 if (amount <= 0)
                 {
-                    throw new Exception("Amount Must be Greather than 0.0");
+                    throw new Exception("Amount Must be Greather than 0");
                 }
                 else
                 {
@@ -42,7 +48,8 @@ namespace BankAccount.Accounts
                         Destiny = Number,
                         Origin = Number,
                         Amount = amount,
-                        TransactionDate= DateTime.UtcNow,
+                        TransactionDate = DateTime.Now,
+                        TransactionType = "Deposit",
                         Status = TransactionStatus.Succeeded
                     };
                     Transactions.Add(transaction);

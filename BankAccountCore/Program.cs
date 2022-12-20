@@ -9,14 +9,19 @@ internal class Program
     {
         IAccount saving = new SavingsAccount
         {
-            Number = "001",
+            Number = 001,
             Status = AccountStatus.Active,
             Customer = new IndividualCustomer(),
         };
-        saving.Deposit(-9);
-        saving.Deposit(1000);
+        saving.Deposit(89);
+        saving.Deposit(90);
+        saving.Deposit(89);
+        saving.Deposit(90000);
+        saving.Deposit(89);
+        saving.Deposit(90);
         saving.ConsultTransactions();
         WriteLine(saving.Status);
+        WriteLine(saving.Balance);
 
     }
 }
