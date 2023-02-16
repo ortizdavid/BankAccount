@@ -23,7 +23,7 @@ namespace BankAccount.Accounts
 
         public void ConsultTransactions()
         {
-            WriteLine("Number\t\tOrigin\t\tDestiny\t\tAmount\t\tType\t\tDate".ToUpper());
+            WriteLine("Number\t\tOrigin\t\tDestination\t\tAmount\t\tType\t\tDate".ToUpper());
             foreach (Transaction transaction in Transactions) 
             { 
                 WriteLine(transaction);
